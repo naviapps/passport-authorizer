@@ -1,0 +1,29 @@
+{
+  "name": "passport-authorizer",
+  "version": "0.0.1",
+  "description": "API Gateway Lambda Authorizer for Passport",
+  "keywords": [
+    "passport",
+    "authorizer",
+    "aws",
+    "lambda",
+    "auth",
+    "authn",
+    "authentication"
+  ],
+  "repository": "naviapps/passport-authorizer",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "bugs": {
+    "url": "https://github.com/naviapps/passport-authorizer/issues"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "./lib",
+  "dependencies": {
+    "passport-strategy": "^1.0.0"
+  }
+}
