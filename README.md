@@ -1,17 +1,32 @@
 # passport-authorizer
 
+[Passport](http://passportjs.org/) strategy for authenticating with a API Gateway Lambda Authorizer.
+
 ## Install
 
 ```bash
-$ npm install passport-authorizer
+$ npm install aws-serverless-express passport-authorizer
+```
+
+or
+
+```bash
+$ yarn add aws-serverless-express passport-authorizer
 ```
 
 ## Usage
 
+#### Configure Strategy
+
 ```js
+const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+const AuthorizerStrategy = require('passport-authorizer');
+
+app.use(awsServerlessExpressMiddleware.eventContext());
+
 passport.use(new AuthorizerStrategy(
   function (authorizer, done) {
-    User.findById(authorizer.principalId, function (err, user) {
+    User.findOne({ username: authorizer.principalId }, function (err, user) {
       if (err) return done(err);
       if (!user) return done(null, false);
       done(err, user);
@@ -19,6 +34,7 @@ passport.use(new AuthorizerStrategy(
   }
 ));
 ```
+
 #### Parameters
 
 By default, `AuthorizerStrategy` expects to find authorizer in parameters named reqPropKey. If your site prefers to name these fields differently, options are available to change the defaults.
@@ -60,3 +76,9 @@ app.get('/private',
     res.json(req.user);
   });
 ```
+
+## License
+
+[The MIT License](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2018-present Navi Apps, Inc.
